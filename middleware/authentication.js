@@ -71,7 +71,7 @@ routes.tokenLoginUser = async (req, res) => {
           email: user.dataValues.email,
         },
         process.env.TOKEN_KEY,
-        { expiresIn: "10m" }
+        { expiresIn: "30m" }
       );
 
       return res.status(201).json({
