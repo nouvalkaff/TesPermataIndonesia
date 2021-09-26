@@ -155,8 +155,10 @@ exports.updateUser = async (req, res) => {
       birth_date,
     } = req.body;
 
+    const id = req.params.id;
+
     const previousData = await User.findOne({
-      where: { id: req.params.id },
+      where: { id: id },
     });
 
     const mdyFormat = birth_date.match(/\d{2,4}/g),
@@ -179,57 +181,70 @@ exports.updateUser = async (req, res) => {
     if (!password) {
       await User.update(
         {
-          first_name,
-          last_name,
-          username,
-          email,
+          first_name: first_name,
+          last_name: last_name,
+          username: username,
+          email: email,
           password: previousData.dataValues.password,
-          no_phone,
-          birth_place,
+          no_phone: no_phone,
+          birth_place: birth_place,
           birth_date: String(new Date(mdyDateFormat)),
         },
         {
           where: {
-            id: req.params.id,
-            email: email,
+            id: id,
+            email: previousData.dataValues.email,
           },
         }
       );
+      const userData = await User.findOne({
+        where: { id: id },
+        attributes: {
+          exclude: ["password", "createdAt", "updatedAt", "no_phone"],
+        },
+      });
+      return res.status(200).json({
+        code: 200,
+        statusText: "OK",
+        success: true,
+        message: `Successfully update a user data with ID ${userData.dataValues.id}`,
+        result: userData,
+      });
     }
 
     if (password) {
       await User.update(
         {
-          first_name,
-          last_name,
-          username,
-          email,
+          first_name: first_name,
+          last_name: last_name,
+          username: username,
+          email: email,
           password: bcrypt.hashSync(password, 12),
-          no_phone,
-          birth_place,
+          no_phone: no_phone,
+          birth_place: birth_place,
           birth_date: String(new Date(mdyDateFormat)),
         },
         {
           where: {
-            id: req.params.id,
-            email: email,
+            id: id,
+            email: previousData.dataValues.email,
           },
         }
       );
+      const dataUser = await User.findOne({
+        where: { id: id },
+        attributes: {
+          exclude: ["password", "createdAt", "updatedAt", "no_phone"],
+        },
+      });
+      return res.status(200).json({
+        code: 200,
+        statusText: "OK",
+        success: true,
+        message: `Successfully update a user data with ID ${dataUser.dataValues.id}`,
+        result: dataUser,
+      });
     }
-    const userData = await User.findOne({
-      where: { id: req.params.id },
-      attributes: {
-        exclude: ["password", "createdAt", "updatedAt", "no_phone"],
-      },
-    });
-    return res.status(200).json({
-      code: 200,
-      statusText: "OK",
-      success: true,
-      message: `Successfully update a user data with ID ${userData.dataValues.id}`,
-      result: userData,
-    });
   } catch (err) {
     console.log(err);
     if (err.isJoi === true) {
