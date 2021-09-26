@@ -8,6 +8,6 @@ Program: NodeJS
 
 Dependencies: bcrypt, cors, dotenv, express, jsonwebtoken, pg, pg-hstore, sequelize, sequelize-cli
 
-Documentation:
+Documentation: https://documenter.getpostman.com/view/15855641/UUxxhoQt
 
 Heroku App: https://app-permata-indonesia.herokuapp.com
