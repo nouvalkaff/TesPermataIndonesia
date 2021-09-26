@@ -12,7 +12,7 @@ How to use locally:
 
 
 -------------------------------------------------------------------------------
-How to use on Heroku Server:
+How to use the app on Heroku Server:
 
 1. The using of app on Heroku server can be seen within documentation link below
 -------------------------------------------------------------------------------
