@@ -161,6 +161,15 @@ exports.updateUser = async (req, res) => {
       where: { id: id },
     });
 
+    if (!previousData) {
+      return res.status(409).json({
+        Code: 409,
+        statustext: "Conflict",
+        success: false,
+        message: `User data with ID ${id} is not exist in database`,
+      });
+    }
+
     const mdyFormat = birth_date.match(/\d{2,4}/g),
       dd = mdyFormat[0],
       mm = mdyFormat[1],
