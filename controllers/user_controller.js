@@ -101,7 +101,7 @@ exports.getAllUsers = async (req, res) => {
       code: 200,
       statusText: "OK",
       success: true,
-      message: `Successfully get a user data`,
+      message: `Successfully get all user data`,
       result: getAllUsers,
     });
   } catch (err) {
