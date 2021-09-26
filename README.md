@@ -10,4 +10,4 @@ Dependencies: bcrypt, cors, dotenv, express, jsonwebtoken, pg, pg-hstore, sequel
 
 Documentation:
 
-Heroku App:
+Heroku App: https://app-permata-indonesia.herokuapp.com
