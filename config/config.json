@@ -12,26 +12,5 @@
         "rejectUnauthorized": false
       }
     }
-  },
-  "test": {
-    "username": "wdssziihdlheph",
-    "password": "62026937db1451e0c4f2997ae4775c4d033e14d06e810623a1b7d7825a01287b",
-    "database": "d4gchlpish5nq7",
-    "host": "ec2-44-194-6-121.compute-1.amazonaws.com",
-    "port": 5432,
-    "dialect": "postgres",
-    "dialectOptions": {
-      "ssl": {
-        "require": true,
-        "rejectUnauthorized": false
-      }
-    }
-  },
-  "production": {
-    "username": "",
-    "password": null,
-    "database": "database_production",
-    "host": "",
-    "dialect": "postgres"
   }
 }
