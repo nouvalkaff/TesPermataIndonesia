@@ -1,11 +1,12 @@
 {
   "name": "tespermataindonesia",
   "version": "1.0.0",
-  "description": "",
+  "description": "tes awal untuk proses rekrutmen di pt permata indonesia.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
