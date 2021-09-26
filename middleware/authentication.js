@@ -7,7 +7,7 @@ routes.roleUser = async (req, res, next) => {
   try {
     const authHead = req.headers.authorization;
 
-    if (req.headers.authorization === "") {
+    if (authHead === "") {
       return res.status(403).json({
         code: 404,
         statusText: "Forbidden",
