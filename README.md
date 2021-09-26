@@ -19,6 +19,16 @@ How to use the app on Heroku Server:
 1. The using of app on Heroku server can be seen within documentation link below.
 -------------------------------------------------------------------------------
 
+```
+Note: if error message below appeared it mostly because of token-login-related problem
+{
+    "code": 500,
+    "statustext": "Internal Server Error",
+    "success": false,
+    "message": "Failed to get data"
+}
+```
+
 DB: PostgreSQL
 
 Program: NodeJS
