@@ -8,13 +8,15 @@ How to use locally:
 
 1. Type cd on terminal into same folder with "app.js".
 2. Type "npm start" to run node or "npm run dev" to run nodemon instead of node.
+3. All routes can be seen in documentation link below.
+4. Change "https://app-permata-indonesia.herokuapp.com" to "localhost:port_number"
 -------------------------------------------------------------------------------
 
 
 -------------------------------------------------------------------------------
 How to use the app on Heroku Server:
 
-1. The using of app on Heroku server can be seen within documentation link below
+1. The using of app on Heroku server can be seen within documentation link below.
 -------------------------------------------------------------------------------
 
 DB: PostgreSQL
