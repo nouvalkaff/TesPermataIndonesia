@@ -15,11 +15,11 @@ router.post("/user/login", tokenLoginUser);
 
 router.post("/user/crt", createUser);
 
-router.get("/user/all", roleUser, getAllUsers);
+router.get("/user/all", getAllUsers);
 
-router.get("/user/:id", roleUser, getUser);
+router.get("/user/:id", getUser);
 
-router.put("/user/upd/:id", roleUser, updateUser);
+router.put("/user/upd/:id", updateUser);
 
-router.delete("/user/del/:id", roleUser, deleteUser);
+router.delete("/user/del/:id", deleteUser);
 module.exports = router;

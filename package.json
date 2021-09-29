@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "mocha"
+    "test": "jest --watchAll --verbose --detectOpenHandles --testTimeout=15000"
   },
   "repository": {
     "type": "git",
@@ -28,9 +28,10 @@
     "sequelize": "^6.6.2"
   },
   "devDependencies": {
-    "mocha": "^9.1.2",
+    "jest": "^27.2.3",
     "nodemon": "^2.0.7",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "supertest": "^6.1.6"
   },
   "bugs": {
     "url": "https://github.com/nouvalkaff/TesPermataIndonesia/issues"
