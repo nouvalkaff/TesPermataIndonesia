@@ -3,41 +3,55 @@ const jwt = require("jsonwebtoken"),
 const { User } = require("../models");
 routes = {};
 
-routes.roleUser = async (req, res, next) => {
+routes.tokenLoginUser = async (req, res) => {
   try {
-    const authHead = req.headers.authorization;
+    const { emailUsername, password } = req.body;
 
-    if (authHead === "") {
-      return res.status(403).json({
-        code: 404,
-        statusText: "Forbidden",
-        success: false,
-        message: "No access, login first!",
+    if (emailUsername[0] == "@" || emailUsername.indexOf("@") == -1) {
+      const spl = emailUsername.split("");
+      spl.shift();
+      const userName = spl.userName("");
+      const loginUsername = await User.findOne({
+        where: { username: userName },
+      });
+
+      const verifyPassword = await bcrypt.compare(
+        password,
+        loginUsername.dataValues.password
+      );
+
+      if (!verifyPassword) {
+        return res.status(401).json({
+          code: 401,
+          statusText: "Unauthorized",
+          success: false,
+          message: "Wrong password, please try again.",
+        });
+      }
+
+      const token = jwt.sign(
+        {
+          user_id: loginUsername.dataValues.id,
+          role: "user",
+          username: loginUsername.dataValues.username,
+          email: loginUsername.dataValues.email,
+        },
+        process.env.TOKEN_KEY,
+        { expiresIn: "30m" }
+      );
+
+      return res.status(201).json({
+        statusCode: 200,
+        statusText: "OK",
+        success: true,
+        message: "Login Success!",
+        data: {
+          token_user: token,
+        },
       });
     }
 
-    const userToken = authHead.split(" ")[1] || authHead;
-
-    jwt.verify(userToken, process.env.TOKEN_KEY, {
-      algorithms: ["HS256", "RS256"],
-    });
-
-    next();
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({
-      code: 500,
-      statustext: "Internal Server Error",
-      success: false,
-      message: "Failed to get data",
-    });
-  }
-};
-
-routes.tokenLoginUser = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ where: { email: email } });
+    const user = await User.findOne({ where: { email: emailUsername } });
 
     if (!user) {
       return res.status(404).json({
@@ -84,6 +98,37 @@ routes.tokenLoginUser = async (req, res) => {
         },
       });
     }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      code: 500,
+      statustext: "Internal Server Error",
+      success: false,
+      message: "Failed to get data",
+    });
+  }
+};
+
+routes.roleUser = async (req, res, next) => {
+  try {
+    const authHead = req.headers.authorization;
+
+    if (authHead === "") {
+      return res.status(403).json({
+        code: 404,
+        statusText: "Forbidden",
+        success: false,
+        message: "No access, login first!",
+      });
+    }
+
+    const userToken = authHead.split(" ")[1] || authHead;
+
+    jwt.verify(userToken, process.env.TOKEN_KEY, {
+      algorithms: ["HS256", "RS256"],
+    });
+
+    next();
   } catch (err) {
     console.log(err);
     res.status(500).json({
