@@ -5,14 +5,17 @@ routes = {};
 
 routes.tokenLoginUser = async (req, res) => {
   try {
-    const { emailUsername, password } = req.body;
+    let { emailUsername, password } = req.body;
 
-    if (emailUsername[0] == "@" || emailUsername.indexOf("@") == -1) {
+    if (emailUsername[0] === "@") {
       const spl = emailUsername.split("");
       spl.shift();
-      const userName = spl.join("");
+      emailUsername = spl.join("");
+    }
+
+    if (emailUsername.indexOf("@") == -1) {
       const loginUsername = await User.findOne({
-        where: { username: userName },
+        where: { username: emailUsername },
       });
 
       const verifyPassword = await bcrypt.compare(
