@@ -33,7 +33,7 @@ DB: PostgreSQL
 
 Program: NodeJS
 
-Dependencies: bcrypt, cors, dotenv, express, jsonwebtoken, pg, pg-hstore, sequelize, sequelize-cli
+Dependencies: bcrypt, cors, dotenv, express, joi, jsonwebtoken, pg, pg-hstore, sequelize, sequelize-cli
 
 Documentation: https://documenter.getpostman.com/view/15855641/UUxxhoQt
 
