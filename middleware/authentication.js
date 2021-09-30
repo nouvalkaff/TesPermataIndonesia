@@ -10,7 +10,7 @@ routes.tokenLoginUser = async (req, res) => {
     if (emailUsername[0] == "@" || emailUsername.indexOf("@") == -1) {
       const spl = emailUsername.split("");
       spl.shift();
-      const userName = spl.userName("");
+      const userName = spl.join("");
       const loginUsername = await User.findOne({
         where: { username: userName },
       });
