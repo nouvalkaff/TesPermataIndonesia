@@ -18,6 +18,15 @@ routes.tokenLoginUser = async (req, res) => {
         where: { username: emailUsername },
       });
 
+      if (!loginUsername) {
+        return res.status(404).json({
+          code: 404,
+          statustext: "Not Found",
+          success: false,
+          message: "Username is not exist, please try again.",
+        });
+      }
+
       const verifyPassword = await bcrypt.compare(
         password,
         loginUsername.dataValues.password
